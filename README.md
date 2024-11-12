@@ -15,18 +15,18 @@ On utilisera Apache Kafka pour la communication interservices. On implémente é
 C'est une application tournant sur Linux (j'ai utilisé WSL). Plusieurs étapes pour mettre en place l'environnement:
 
 1. Mise en place de la base de données MongoDB qui entreposera les documents, et Apache Kafka. Pour cela on utilisera les images docker. Exécutez à la racine du projet :
-    docker-compose up -d
+    `docker-compose up -d`
 
 2. Installez Redis si ce n'est pas déjà fait :
-    sudo apt install redis-server
+    `sudo apt install redis-server`
 
    Démarrez Redis avant de lancer les services :
-     sudo service redis-server start
+    `sudo service redis-server start`
 
-3. Mise en place du load balancer. Ouvrez le fichier nginx.conf:
-    sudo nano /etc/nginx/nginx.conf
+3. Mise en place du load balancer. Créez un fichier de configuration pour le projet:
+    `sudo nano /etc/nginx/conf.d/project_config.conf`
 
-Ajoutez dans le bloc http les instructions suivantes : 
+Ajoutez dans le code suivant : 
 
     ### CONFIG POUR LE PROJET DE WEB TEXT EDITING
         # Configuration de DocumentManagmentService (Service sur le port 3001)
@@ -81,17 +81,17 @@ Ajoutez dans le bloc http les instructions suivantes :
         }
     }
 
+N'oubliez pas d'inclure la ligne suivante dans le bloc http du fichier `nginx.conf` si ce n'est pas déjà fait:
+`include /etc/nginx/conf.d/*.conf;`
+
 Redémarrez nginx:
-    sudo systemctl restart nginx
+    `sudo systemctl restart nginx`
 
-Ensuite on peut démarrer les différentes instances des services dans à la racine des services eux-mêmes (c'est réexpliqué dans les README.md des différents services).
+4. Ensuite on peut démarrer les différentes instances des services dans à la racine des services eux-mêmes: suivez les instructions des `README.md` des services.
 
-4. Démarrez ensuite les services par :
-    npm start
-
-5. Le front-end contient le fichier App.js où il est demandé à l'utilisateur de rentrer un titre de fichier. On démarre le front-end par :
-    npm start
-Quill s'ouvre dans le navigateur et on peut alors modifier le document.
+5. Le front-end contient le fichier App.js où il est demandé à l'utilisateur de rentrer un titre de fichier dans la variable `initialDocumentTitle`. On démarre le front-end par :
+    `npm start`
+Quill s'ouvre dans le navigateur et on peut alors modifier le document. Les modifications sont propagées aux autres utilisateurs et la base de données est aussi mise à jour. 
 
 
 

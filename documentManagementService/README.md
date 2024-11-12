@@ -5,9 +5,7 @@ Ce microservice gère la création, la récupération, la mise à jour et la sup
 ## Installation
 
 1. Configurez votre fichier `.env` en spécifiant `MONGO_URI` et `PORT`.
-2. Mettez en place la base de données mongodb qui servira à entreposer les documents (veuillez changer les ports si vous les modifiez dans le fichier .env) ainsi que les conteneurs zookeeper/kafka. Pour cela faites un :
-    docker-compose up -d
-dans le terminal.
+2. Dans `kafkaConfig.js`, dans `brokers`, saisissez votre <ip>:<port>.
 3. Lancez le service avec `npm start`. Si on veut plutôt utiliser le load balancer et distribuer des instances du service aux différents clients pour gérer la charge, faites : 
     chmod +x start.sh
     ./start.sh

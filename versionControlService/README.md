@@ -4,10 +4,11 @@ Ce service gère l'historique des versions des documents et permet de restaurer 
 
 ## Installation
 
-1. Clonez le dépôt.
-2. Installez les dépendances avec `npm install`.
-3. Configurez votre fichier `.env` avec `MONGO_URI`, `PORT`, et `KAFKA_BROKER`.
-4. Démarrez le service avec `npm start`.
+1. Configurez votre fichier `.env` en spécifiant `MONGO_URI` et `PORT`.
+2. Dans `kafkaConfig.js`, dans `brokers`, saisissez votre <ip>:<port>.
+3. Lancez le service avec `npm start`. Si on veut plutôt utiliser le load balancer et distribuer des instances du service aux différents clients pour gérer la charge, faites : 
+    chmod +x start.sh
+    ./start.sh
 
 ## API Endpoints
 

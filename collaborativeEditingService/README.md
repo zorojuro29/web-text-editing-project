@@ -4,24 +4,11 @@ Ce service permet l'édition collaborative en temps réel des documents.
 
 ## Installation
 
-1. Configurez votre fichier `.env` en spécifiant `MONGO_URI`, `PORT`, et `KAFKA_BROKER`.
-2. Lancez un serveur Kafka via Docker:
-    docker run -d \
-    --name zookeeper \
-    -p 2181:2181 \
-    zookeeper
-
-    docker run -d \
-    --name kafka \
-    --link zookeeper:zookeeper \
-    -p 9092:9092 \
-    -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 \
-    -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
-    -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-    bitnami/kafka
-
-
-5. Lancez le service avec `npm start`.
+1. Configurez votre fichier `.env` en spécifiant `MONGO_URI` et `PORT`.
+2. Dans `kafkaConfig.js`, dans `brokers`, saisissez votre <ip>:<port>.
+3. Lancez le service avec `npm start`. Si on veut plutôt utiliser le load balancer et distribuer des instances du service aux différents clients pour gérer la charge, faites : 
+    chmod +x start.sh
+    ./start.sh
 
 ## API Endpoints
 
